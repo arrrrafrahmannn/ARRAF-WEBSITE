@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { services } from "@/lib/content";
+import { PageIntro, Arrow } from "@/components/studio-shell";
+export const metadata: Metadata = {title:"Our expertise"};
+export default function Services(){return <main id="main" className="page-wrap"><PageIntro index="01" title="Built around your question."><p>Five disciplines. A shared commitment to clarity, evidence and thoughtful academic work.</p></PageIntro><div className="service-catalogue">{services.map(s=><article key={s.id}><div className="catalogue-number mono">/{s.number}</div><div><h2><a href={`/services/${s.id}`}>{s.title}</a></h2><p>{s.description}</p><div className="service-chips">{s.items.slice(0,4).map(x=><span key={x}>{x}</span>)}</div></div><a className="circle-link" aria-label={`Explore ${s.title}`} href={`/services/${s.id}`}><Arrow diagonal/></a></article>)}</div><div className="integrity-note"><span className="eyebrow">A NOTE ON OUR ROLE</span><p>We support your research and your understanding. You remain the author of your academic work.</p><a className="text-link" href="/terms">Our academic-integrity approach <Arrow/></a></div></main>;}
