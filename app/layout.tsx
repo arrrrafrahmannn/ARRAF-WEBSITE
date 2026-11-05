@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./liquid-glass.css";
+import "./material-field.css";
 import LiquidSteel from "@/components/liquid-steel";
 import { Header, Footer } from "@/components/studio-shell";
 

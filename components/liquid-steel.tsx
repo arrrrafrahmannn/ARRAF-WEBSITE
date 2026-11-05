@@ -4,65 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { clamp, follow, renderSize, sampleScene, sectionMotion } from "@/lib/scroll-scene";
 
-const vertex = `attribute vec2 position; varying vec2 uv; void main(){uv=position;gl_Position=vec4(position,0.,1.);}`;
-const fragment = `precision highp float;
-varying vec2 uv;
-uniform vec2 resolution;
-uniform vec4 framing;
-uniform vec4 optics;
-uniform vec2 pointer;
-uniform float time;
-mat2 rotate(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
-float blend(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
-float shape(vec3 p){
-  p.xz=rotate(optics.x)*p.xz;
-  float melt=framing.w;
-  float breathing=sin(time*.35)*.025;
-  vec3 q=p-vec3(.06*sin(time*.21),.23-melt*.25,0.);
-  q.xz=rotate(q.y*.11*sin(time*.15))*q.xz;
-  float wave=sin(q.x*3.8+time*.3)*sin(q.y*3.3-time*.19)*sin(q.z*3.4+time*.22);
-  float ball=length(q*vec3(1.-melt*.13,1.+melt*.28,1.))-(.96+breathing+.055*wave);
-  float neck=length(p-vec3(.12*sin(time*.23),-.48,0.))-(.42+melt*.12);
-  float pool=(length((p-vec3(0.,-.96,0.))*vec3(.76-melt*.13,6.4,.9-melt*.12))-(.9+melt*.12))/3.2;
-  return blend(blend(ball,neck,.4),pool,.23+melt*.06);
-}
-vec3 normalAt(vec3 p){vec2 e=vec2(.0016,-.0016);return normalize(e.xyy*shape(p+e.xyy)+e.yyx*shape(p+e.yyx)+e.yxy*shape(p+e.yxy)+e.xxx*shape(p+e.xxx));}
-float softbox(vec3 d,vec3 c,vec2 size){
-  vec3 f=normalize(c),r=normalize(cross(vec3(0.,1.,0.),f)),u=cross(f,r);
-  float z=dot(d,f);vec2 q=vec2(dot(d,r),dot(d,u))/max(z,.01);
-  return (1.-smoothstep(0.,.055,max(abs(q.x)-size.x,abs(q.y)-size.y)))*step(0.,z);
-}
-vec3 studio(vec3 d){
-  float warmth=optics.y;
-  vec3 silver=mix(vec3(.89,.91,.94),vec3(.95,.85,.69),warmth*.55);
-  vec3 col=vec3(.019)+vec3(.025)*max(d.y,0.);
-  col+=silver*softbox(d,vec3(-2.,2.,2.),vec2(.16,1.02));
-  col+=vec3(.65,.68,.7)*softbox(d,vec3(2.,.3,1.),vec2(.075,1.4));
-  col+=silver*.56*softbox(d,vec3(.1,3.,-1.),vec2(.82,.12));
-  col+=silver*.21*pow(max(0.,dot(d,normalize(vec3(-1.,.7,-2.)))),16.);
-  col+=vec3(.08)*pow(max(0.,1.-abs(d.y+.24)*3.),10.);
-  return col;
-}
-void main(){
-  vec2 screen=uv;screen.x*=resolution.x/resolution.y;
-  vec2 p=(screen-framing.xy-pointer*vec2(.025,.018))/framing.z;
-  vec3 ro=vec3(0.,.27,4.2),rd=normalize(vec3(p*1.45,-3.1));
-  ro.xz=rotate(optics.x*.3)*ro.xz;rd.xz=rotate(optics.x*.3)*rd.xz;
-  vec3 off=ro-vec3(0.,-.08,0.);float b=dot(off,rd),c=dot(off,off)-3.24,disc=b*b-c;
-  float hit=0.,travel=max(0.,-b-sqrt(max(disc,0.)));
-  if(disc>0.){for(int i=0;i<54;i++){float dist=shape(ro+rd*travel);if(dist<.0025){hit=1.;break;}travel+=max(.001,dist*.8);if(travel>7.)break;}}
-  float ripple=sin(screen.x*1.7+screen.y*2.1+optics.z*5.)*.2;
-  vec3 backdropN=normalize(vec3(screen.x*.13+sin(screen.y*2.+optics.z*3.)*.18, .6+screen.y*.3, 1.));
-  vec3 sheen=studio(reflect(normalize(vec3(screen,-2.)),backdropN));
-  float warm=optics.y;
-  vec3 col=mix(vec3(.017,.018,.019),vec3(.032,.028,.023),warm)*(.9+ripple);
-  col+=sheen*.036;
-  float rim=1.-smoothstep(.05,1.8,length(vec2(screen.x-framing.x*.55,screen.y+.25)));
-  col+=mix(vec3(.026,.027,.028),vec3(.04,.033,.022),warm)*rim;
-  if(hit>.5){vec3 pos=ro+rd*travel,n=normalAt(pos);float fres=pow(1.-max(0.,dot(-rd,n)),3.);vec3 metal=studio(reflect(rd,n))*(.83+.17*fres)+vec3(.11)*fres;metal*=.72+.28*smoothstep(-1.12,.35,pos.y);metal=pow(metal,vec3(.9));col=mix(col,metal,.82);}
-  float grain=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453)-.5;
-  col+=grain/510.;gl_FragColor=vec4(col,1.);
-}`;
+import { materialVertex as vertex, materialFragment as fragment, particleVertex, particleFragment } from "@/lib/material-shaders";
+import { particleSeeds, particleCount } from "@/lib/particle-field";
 
 type Stage = { element: HTMLElement; top: number; height: number; index: number; active: boolean };
 
@@ -102,6 +45,11 @@ export default function LiquidSteel() {
     let gl: WebGLRenderingContext | null = null, program: WebGLProgram | null = null, buffer: WebGLBuffer | null = null;
     let vertexShader: WebGLShader | null = null, fragmentShader: WebGLShader | null = null;
     let uniforms: Record<string, WebGLUniformLocation | null> = {};
+    let particleProgram: WebGLProgram | null = null, particleBuffer: WebGLBuffer | null = null;
+    let particleVS: WebGLShader | null = null, particleFS: WebGLShader | null = null;
+    let particleUniforms: Record<string, WebGLUniformLocation | null> = {};
+    let positionAttribute = 0, seedAttribute = 0;
+    function releaseParticles() { if (!gl) return; gl.deleteBuffer(particleBuffer); gl.deleteProgram(particleProgram); gl.deleteShader(particleVS); gl.deleteShader(particleFS); }
 
     function measure() {
       stages = Array.from(document.querySelectorAll<HTMLElement>("main > section, main > .page-intro, main > .service-catalogue, main > .service-body, main > .process-list, main > .pricing-table, main > .contact-layout, main > .about-statement, main > .studio-principles, main > .global-section, main > .faq-list, main > .legal-content, main > .admin-desk, .site-footer")).map((element, index) => {
@@ -125,7 +73,7 @@ export default function LiquidSteel() {
     function onResize() { measurePending = true; resizePending = true; }
     function onPointer(e: PointerEvent) { if (e.pointerType === "touch") return; targetX = e.clientX / innerWidth - .5; targetY = .5 - e.clientY / innerHeight; }
     function onVisibility() { cancelAnimationFrame(frame); last = 0; if (!document.hidden && !disposed) { dirty = true; frame = requestAnimationFrame(draw); } }
-    function fail() { setFailed(true); if (gl) { gl.deleteBuffer(buffer); gl.deleteProgram(program); gl.deleteShader(vertexShader); gl.deleteShader(fragmentShader); } gl = null; }
+    function fail() { setFailed(true); releaseParticles(); if (gl) { gl.deleteBuffer(buffer); gl.deleteProgram(program); gl.deleteShader(vertexShader); gl.deleteShader(fragmentShader); } gl = null; }
     function lose(e: Event) { e.preventDefault(); fail(); }
     try {
       gl = el.getContext("webgl", { alpha: false, antialias: false, depth: false, stencil: false, preserveDrawingBuffer: false, powerPreference: "high-performance" });
@@ -137,8 +85,16 @@ export default function LiquidSteel() {
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw Error("Shader link failed");
       gl.useProgram(program); buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
-      const position = gl.getAttribLocation(program, "position"); gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+      positionAttribute = gl.getAttribLocation(program, "position"); gl.enableVertexAttribArray(positionAttribute); gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
       uniforms = Object.fromEntries(["resolution", "framing", "optics", "pointer", "time"].map(name => [name, gl!.getUniformLocation(program!, name)]));
+      particleVS = compile(gl.VERTEX_SHADER, particleVertex); particleFS = compile(gl.FRAGMENT_SHADER, particleFragment);
+      particleProgram = gl.createProgram(); if (!particleProgram) throw Error("Particle program unavailable");
+      gl.attachShader(particleProgram, particleVS); gl.attachShader(particleProgram, particleFS); gl.linkProgram(particleProgram);
+      if (!gl.getProgramParameter(particleProgram, gl.LINK_STATUS)) throw Error("Particle link failed");
+      particleBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, particleBuffer); gl.bufferData(gl.ARRAY_BUFFER, particleSeeds(), gl.STATIC_DRAW);
+      seedAttribute = gl.getAttribLocation(particleProgram, "seed");
+      particleUniforms = Object.fromEntries(["resolution", "pointer", "time", "progress"].map(name => [name, gl!.getUniformLocation(particleProgram!, name)]));
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
       setFailed(false);
     } catch { fail(); }
 
@@ -174,10 +130,24 @@ export default function LiquidSteel() {
           stage.active = visible;
         }
         if (gl) {
+          gl.useProgram(program); gl.disable(gl.BLEND);
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.enableVertexAttribArray(positionAttribute); gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
           gl.uniform4f(uniforms.framing, scene.x, scene.y, scene.scale, scene.melt);
           gl.uniform4f(uniforms.optics, scene.rotation, scene.warmth, scene.depth, 0);
           gl.uniform2f(uniforms.pointer, animate ? x : 0, animate ? y : 0); gl.uniform1f(uniforms.time, elapsed);
           gl.drawArrays(gl.TRIANGLES, 0, 6);
+          if (particleProgram) {
+            gl.useProgram(particleProgram); gl.bindBuffer(gl.ARRAY_BUFFER, particleBuffer);
+            if (seedAttribute !== positionAttribute) gl.disableVertexAttribArray(positionAttribute);
+            gl.enableVertexAttribArray(seedAttribute); gl.vertexAttribPointer(seedAttribute, 4, gl.FLOAT, false, 0, 0);
+            gl.uniform2f(particleUniforms.resolution, el!.width, el!.height);
+            gl.uniform2f(particleUniforms.pointer, animate ? x : 0, animate ? y : 0);
+            gl.uniform1f(particleUniforms.time, elapsed); gl.uniform1f(particleUniforms.progress, visualProgress);
+            gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+            gl.drawArrays(gl.POINTS, 0, particleCount(mobile(), quality));
+            gl.disable(gl.BLEND); if (seedAttribute !== positionAttribute) gl.disableVertexAttribArray(seedAttribute);
+            gl.useProgram(program);
+          }
         }
         dirty = false;
       }
@@ -200,6 +170,7 @@ export default function LiquidSteel() {
       disposed = true; cancelAnimationFrame(frame); observer.disconnect();
       window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize); window.removeEventListener("pointermove", onPointer);
       window.visualViewport?.removeEventListener("resize", onResize); document.removeEventListener("visibilitychange", onVisibility); el.removeEventListener("webglcontextlost", lose);
+      releaseParticles();
       if (gl) { gl.deleteBuffer(buffer); gl.deleteProgram(program); gl.deleteShader(vertexShader); gl.deleteShader(fragmentShader); }
       for (const stage of stages) { stage.element.classList.remove("scroll-stage"); delete stage.element.dataset.stage; }
     };
@@ -208,7 +179,7 @@ export default function LiquidSteel() {
   function toggleMotion() { const next = !enabled; setEnabled(next); try { sessionStorage.setItem("arrafed-motion", next ? "live" : "paused"); } catch {} }
   function toggleGlass() { const next = !solid; setSolid(next); try { sessionStorage.setItem("arrafed-glass", next ? "solid" : "clear"); } catch {} }
   return <>
-    <div className={`liquid-field${failed ? " is-fallback" : ""}`} aria-hidden="true"><div className="liquid-field-fallback"/><canvas ref={canvas} className="liquid-field-canvas"/><div className="liquid-field-scrim"/></div>
-    <div className="material-controls" role="group" aria-label="Appearance preferences"><span className="material-control-label" aria-hidden="true">STEEL / GLASS</span><button onClick={toggleMotion} disabled={prefersReduced} aria-pressed={!enabled}>{prefersReduced ? "Reduced motion" : enabled ? "Pause motion" : "Motion paused"}<span aria-hidden="true">{enabled ? "Ⅱ" : "▷"}</span></button><button onClick={toggleGlass} aria-pressed={solid}>{solid ? "Solid glass" : "More contrast"}<span aria-hidden="true">◐</span></button></div>
+    <div className={`liquid-field${failed ? " is-fallback" : ""}`} aria-hidden="true"><div className="liquid-field-fallback"><svg className="field-fallback-svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="fallback-metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#101712"/><stop offset=".25" stopColor="#c6d2ba"/><stop offset=".32" stopColor="#e8eedf"/><stop offset=".4" stopColor="#19251b"/><stop offset=".7" stopColor="#6e7b66"/><stop offset="1" stopColor="#08100a"/></linearGradient></defs><path className="fallback-ribbon" d="M-100 600C320 60 740 1000 1530 180M-100 160C500 800 800 80 1550 600M-80 780C430 400 980 420 1500 30"/>{Array.from({length:3},(_,i)=><ellipse key={`track-${i}`} className="fallback-track" cx="760" cy="450" rx={540-i*80} ry={170+i*25} transform={`rotate(${i*47-30} 760 450)`}/>)}{Array.from({length:12},(_,i)=><ellipse key={`form-${i}`} className="fallback-form" cx={700+Math.cos(i*2.4)*520} cy={450+Math.sin(i*2.4)*320} rx={i===0?95:20+(i*17)%40} ry={i===0?120:22+(i*23)%45}/>)}{Array.from({length:90},(_,i)=><circle key={`dust-${i}`} className="fallback-dust" cx={(i*173)%1400} cy={(i*97)%900} r={i%7===0?1.8:.8}/>)}</svg></div><canvas ref={canvas} className="liquid-field-canvas"/><div className="liquid-field-scrim"/></div>
+    <div className="material-controls" role="group" aria-label="Appearance preferences"><span className="material-control-label" aria-hidden="true">THE FIELD</span><button onClick={toggleMotion} disabled={prefersReduced} aria-pressed={!enabled}>{prefersReduced ? "Reduced motion" : enabled ? "Pause motion" : "Motion paused"}<span aria-hidden="true">{enabled ? "Ⅱ" : "▷"}</span></button><button onClick={toggleGlass} aria-pressed={solid}>{solid ? "Solid glass" : "More contrast"}<span aria-hidden="true">◐</span></button></div>
   </>;
 }
