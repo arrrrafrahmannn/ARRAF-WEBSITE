@@ -4,7 +4,7 @@ A responsive academic research studio with a continuous, scroll-driven WebGL mat
 
 ## Stack
 
-React 19, TypeScript, Vinext (Next.js App Router conventions), Tailwind CSS 4, Cloudflare Workers, D1 + Drizzle and R2. Self-hosted Nimbus fonts are licensed under the terms in `public/fonts/LICENSE.txt`.
+React 19, TypeScript, Vinext (Next.js App Router conventions), Tailwind CSS 4, Cloudflare Workers, D1 + Drizzle and R2. Self-hosted font licenses and upstream notices are included in `public/fonts/licenses/`. The previous Nimbus font assets have been replaced.
 
 ## Development
 
@@ -31,6 +31,17 @@ The studio desk lists the latest 200 records with search, status filters, status
 ## Content
 
 Business details and pricing come from the supplied ARRAFED brief. Prices are indicative BDT rates or defined support scopes, not payment offers. No testimonials or unverified project totals have been published. Privacy and academic-integrity pages describe the actual form and storage behavior. No payment or email-delivery integration is included.
+
+## Typography
+
+The hierarchy uses four specific roles rather than changing typefaces arbitrarily between sections:
+
+- **Latin Modern Roman Dunhill:** editorial hero questions, narrative statements, page introductions and selected invitation headings.
+- **P052:** long-form reading, service descriptions, answers and policy text; its real italic face is reserved for complete editorial lead sentences.
+- **Latin Modern Sans Demi Condensed:** navigation, controls, service names and functional headings.
+- **Latin Modern Mono:** captions, research-stage labels, identifiers and aligned figures.
+
+Fonts are served as compressed WOFF files with `font-display: swap`; the three primary faces are preloaded. `app/typography.css` holds role tokens, responsive scales, real font weights, kerning, tracking and reading measures. No external font request is required. Form controls remain at least 16px on mobile, small structural captions have been increased, and hero line widths were checked from 320px to 1920px. The font specimen and width proofs are local QA artifacts, not browser screenshots. Full rendered-browser typography verification remains unavailable while the managed preview service is missing.
 
 ## Motion and accessibility
 

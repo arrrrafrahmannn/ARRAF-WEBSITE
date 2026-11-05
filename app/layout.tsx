@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./liquid-glass.css";
 import "./material-field.css";
+import "./typography.css";
 import LiquidSteel from "@/components/liquid-steel";
 import { Header, Footer } from "@/components/studio-shell";
 
@@ -23,6 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href="/fonts/arrafed-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/arrafed-utility.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/arrafed-reading.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      </head>
       <body className="antialiased"><a className="skip-link" href="#main">Skip to content</a><LiquidSteel /><Header />{children}<Footer /></body>
     </html>
   );
