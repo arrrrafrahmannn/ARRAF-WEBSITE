@@ -1,4 +1,3 @@
-import LiquidSteel from "@/components/liquid-steel";
 import Expertise from "@/components/expertise";
 import Faq from "@/components/faq";
 import { Arrow } from "@/components/studio-shell";
@@ -7,7 +6,7 @@ export default function Home() {
   return <main id="main">
     <section className="hero">
       <div className="hero-meta mono"><span>ACADEMIC RESEARCH & EMPIRICAL DATA STUDIO</span><span>DHAKA, BD — WORKING WORLDWIDE</span></div>
-      <div className="hero-composition"><div className="hero-type"><h1>RESEARCH.<br/><span>WITH INTENTION.</span></h1><div className="hero-introduction"><span className="intro-rule"/><p>Clearer questions.<br/>Stronger evidence.<br/>Work that holds together.</p></div><a className="button button-light hero-button" href="/contact">Discuss your project <Arrow diagonal/></a></div><LiquidSteel/></div>
+      <div className="hero-composition"><div className="hero-material-note mono" aria-hidden="true"><span>FORM / 01</span><span>A MATERIAL IN CONTINUOUS CHANGE.</span></div><div className="hero-type"><h1>RESEARCH.<br/><span>WITH INTENTION.</span></h1><div className="hero-introduction"><span className="intro-rule"/><p>Clearer questions.<br/>Stronger evidence.<br/>Work that holds together.</p></div><a className="button button-light hero-button" href="/contact">Discuss your project <Arrow diagonal/></a></div></div>
       <div className="hero-bottom"><span className="mono">INDEPENDENT THINKING. RIGOROUS METHODS.</span><a href="#expertise" className="explore-link">Explore the studio <span>↓</span></a><span className="mono hero-edition">EST. IN DHAKA / OPEN TO THE WORLD</span></div>
     </section>
     <section className="manifesto section-pad"><div className="section-label"><span className="eyebrow">01 / A CLEARER WAY FORWARD</span><span className="crosshair" aria-hidden="true">+</span></div><div className="manifesto-content"><h2>There’s a shape<br/>to every <span>complexity.</span></h2><div className="manifesto-copy"><p>We help you find it.</p><p>From a first research question to a final analytical result, ARRAFED brings structure, evidence and care to demanding university work.</p><a className="text-link" href="/about">Inside the studio <Arrow diagonal/></a></div></div></section>

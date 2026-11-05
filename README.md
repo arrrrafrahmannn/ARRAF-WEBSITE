@@ -1,6 +1,6 @@
 # ARRAFED — Research, with intention.
 
-A responsive academic research studio with a custom WebGL liquid-steel scene, editorial typography, dedicated service routes and a working inquiry backend.
+A responsive academic research studio with a continuous, scroll-driven WebGL liquid-steel environment, translucent Liquid Glass surfaces and editorial typography, dedicated service routes and a working inquiry backend.
 
 ## Stack
 
@@ -34,8 +34,16 @@ Business details and pricing come from the supplied ARRAFED brief. Prices are in
 
 ## Motion and accessibility
 
-The shader is self-contained, caps render resolution and frame rate, pauses when offscreen or hidden, and respects reduced motion. A static chrome fallback appears when WebGL is unavailable. The interface includes keyboard-operable navigation, tabs, native disclosure controls, labelled fields, visible focus and mobile layouts.
+One viewport-filling WebGL canvas lives in the root layout, behind every route and section. Normalised scroll position controls a continuously interpolated camera, model scale, melting, reflection temperature and material depth. Local section progress moves reading planes, headings, highlights and wireframe detail in both scroll directions. Native scrolling is preserved; the renderer does not use once-only reveal triggers or intercept wheel/touch input.
+
+`lib/scroll-scene.ts` contains pure choreography and allocation calculations. `components/liquid-steel.tsx` owns the animation loop, passive input listeners, cached section geometry and shader. `app/liquid-glass.css` applies the floating optical surfaces. Typography is self-hosted; the palette is graphite, pewter and restrained champagne rather than blue/purple effects.
+
+The renderer targets display-refresh animation with an adaptive pixel budget instead of a fixed low frame-rate throttle. It reduces resolution if sustained frame timing misses budget. Actual 60 fps performance depends on device/browser/GPU and has not been benchmarked in this environment. Rendering stops while the document is hidden. No framework state updates or layout measurements occur on each scroll event.
+
+Reduced-motion preferences disable camera travel, deformation and section transforms. A visible motion control pauses the environment; an additional contrast control provides opaque reading surfaces. Reduced transparency, increased contrast and browsers without backdrop filtering have solid fallbacks. Text-sized reading planes protect contrast over bright specular reflections. Preferences are stored only for the current browser session. If WebGL fails, a full-viewport static chrome fallback preserves the background without section seams.
 
 ## Verification
 
-TypeScript and production build checks are part of delivery. The managed local preview daemon was unavailable during the initial build. Browser checks, where available, use the deployed owner-private review site; see the delivery notes for their outcome.
+Run `node --test tests/scroll-scene.test.mjs` for scroll continuity, reversibility, frame-rate-independent easing, mobile framing, section progress, adaptive render limits and single-canvas integration checks. TypeScript and production build checks are part of delivery. The original inquiry backend was verified in an isolated SQLite/R2 integration harness; visual changes do not modify its API or storage schema.
+
+The managed local preview daemon was unavailable during this update. Browser visual, responsive-device and measured frame-rate checks must be distinguished from the successful automated checks; see the delivery notes for the current outcome.

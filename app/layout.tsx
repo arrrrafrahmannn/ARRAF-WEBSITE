@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./liquid-glass.css";
+import LiquidSteel from "@/components/liquid-steel";
 import { Header, Footer } from "@/components/studio-shell";
 
 export const metadata: Metadata = {
@@ -20,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased"><a className="skip-link" href="#main">Skip to content</a><Header />{children}<Footer /></body>
+      <body className="antialiased"><a className="skip-link" href="#main">Skip to content</a><LiquidSteel /><Header />{children}<Footer /></body>
     </html>
   );
 }
