@@ -34,14 +34,14 @@ Business details and pricing come from the supplied ARRAFED brief. Prices are in
 
 ## Typography
 
-The hierarchy uses four specific roles rather than changing typefaces arbitrarily between sections:
+The current direction uses geometric display type and humanist sans reading text, replacing the previous serif-led treatment:
 
-- **Latin Modern Roman Dunhill:** editorial hero questions, narrative statements, page introductions and selected invitation headings.
-- **P052:** long-form reading, service descriptions, answers and policy text; its real italic face is reserved for complete editorial lead sentences.
-- **Latin Modern Sans Demi Condensed:** navigation, controls, service names and functional headings.
-- **Latin Modern Mono:** captions, research-stage labels, identifiers and aligned figures.
+- **URW Gothic Demi:** hero statements, page introductions, narrative headlines and the wordmark.
+- **Latin Modern Sans Bold:** navigation, controls, service names and functional headings.
+- **Latin Modern Sans Regular / Oblique:** reading text and complete editorial lead sentences.
+- **Latin Modern Mono Light Condensed:** technical captions, identifiers and aligned figures.
 
-Fonts are served as compressed WOFF files with `font-display: swap`; the three primary faces are preloaded. `app/typography.css` holds role tokens, responsive scales, real font weights, kerning, tracking and reading measures. No external font request is required. Form controls remain at least 16px on mobile, small structural captions have been increased, and hero line widths were checked from 320px to 1920px. The font specimen and width proofs are local QA artifacts, not browser screenshots. Full rendered-browser typography verification remains unavailable while the managed preview service is missing.
+The fonts are self-hosted as compressed WOFF assets with version-distinct filenames and `font-display: swap`. Three primary faces are preloaded. Existing license notices remain in `public/fonts/licenses/`. Display sizes and line breaks have been recalculated for the wider geometric letterforms; form inputs remain 16px on mobile. Full browser typography review is still unavailable while the managed preview service is missing.
 
 ## Motion and accessibility
 

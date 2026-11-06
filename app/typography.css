@@ -1,48 +1,48 @@
-/* ARRAFED type: editorial thought / technical structure / precise annotation. */
+/* ARRAFED type: geometric display / humanist reading / condensed annotation. */
 @font-face {
-  font-family: 'LM Roman Dunhill';
-  src: url('/fonts/arrafed-display.woff') format('woff');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LM Sans Demi Condensed';
-  src: url('/fonts/arrafed-utility.woff') format('woff');
+  font-family: 'URW Gothic Display';
+  src: url('/fonts/gothic-display.woff') format('woff');
   font-style: normal;
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
-  font-family: 'P052 Reading';
-  src: url('/fonts/arrafed-reading.woff') format('woff');
+  font-family: 'LM Sans Interface';
+  src: url('/fonts/industrial-ui.woff') format('woff');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LM Sans Text';
+  src: url('/fonts/humanist-text.woff') format('woff');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
-  font-family: 'P052 Reading';
-  src: url('/fonts/arrafed-reading-italic.woff') format('woff');
+  font-family: 'LM Sans Text';
+  src: url('/fonts/humanist-oblique.woff') format('woff');
   font-style: italic;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
-  font-family: 'LM Mono';
-  src: url('/fonts/arrafed-mono.woff') format('woff');
+  font-family: 'LM Mono Condensed';
+  src: url('/fonts/technical-mono.woff') format('woff');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 :root {
-  --type-display: 'LM Roman Dunhill', 'Bodoni MT', Georgia, serif;
-  --type-reading: 'P052 Reading', 'Palatino Linotype', Palatino, Georgia, serif;
-  --type-ui: 'LM Sans Demi Condensed', 'Arial Narrow', Arial, sans-serif;
-  --type-mono: 'LM Mono', 'Courier New', monospace;
+  --type-display: 'URW Gothic Display', 'Century Gothic', sans-serif;
+  --type-reading: 'LM Sans Text', 'Trebuchet MS', sans-serif;
+  --type-ui: 'LM Sans Interface', 'Trebuchet MS', sans-serif;
+  --type-mono: 'LM Mono Condensed', 'Courier New', monospace;
 }
 @theme {
   --font-sans: var(--type-ui);
-  --font-serif: var(--type-reading);
+  --font-reading: var(--type-reading);
   --font-mono: var(--type-mono);
 }
 body {
@@ -80,8 +80,8 @@ textarea { line-height: 1.65; }
 .material-control-label { font-size: 9px; }
 /* The question is editorial; the outcome is compact and engineered. */
 .field-hero .hero-type { width: 62%; }
-.field-hero .hero-type h1 { font-family: var(--type-display); font-size: clamp(88px,8.5vw,142px); font-weight: 400; line-height: .95; letter-spacing: -.028em; }
-.field-hero .hero-type h1>.hero-question { display: block; font-family: var(--type-display); font-size: 1em; font-weight: 400; font-style: normal; color: #f0f0e5; margin: 0; line-height: 1.02; letter-spacing: -.028em; }
+.field-hero .hero-type h1 { font-family: var(--type-display); font-size: clamp(88px,8.5vw,142px); font-weight: 600; line-height: .95; letter-spacing: -.028em; }
+.field-hero .hero-type h1>.hero-question { display: block; font-family: var(--type-display); font-size: 1em; font-weight: 600; font-style: normal; color: #f0f0e5; margin: 0; line-height: 1.02; letter-spacing: -.028em; }
 .field-hero .hero-type h1>.hero-outcome { display: block; font-family: var(--type-ui); font-size: .65em; font-weight: 600; font-style: normal; text-transform: uppercase; color: #c3cfb6; letter-spacing: -.018em; line-height: 1.02; margin-top: clamp(38px,4vw,62px); }
 .hero-summary { max-width: 345px; margin-top: 30px; }
 .hero-summary>p { font-family: var(--type-reading); font-size: 18px; line-height: 1.6; letter-spacing: -.012em; }
@@ -94,7 +94,7 @@ textarea { line-height: 1.65; }
 .field-guide-link { font-size: 12px; }
 /* Narrative headings and functional headings have different voices and spacing. */
 .field-home h2 { font-family: var(--type-ui); font-weight: 600; font-size: clamp(48px,5.8vw,90px); letter-spacing: -.035em; line-height: 1.03; }
-.field-statement h2,.field-principle h2,.field-invitation h2 { font-family: var(--type-display); font-weight: 400; font-size: clamp(56px,6.8vw,108px); letter-spacing: -.028em; line-height: 1.03; }
+.field-statement h2,.field-principle h2,.field-invitation h2 { font-family: var(--type-display); font-weight: 600; font-size: clamp(56px,6.8vw,108px); letter-spacing: -.028em; line-height: 1.03; }
 .field-home h2 em { font-family: inherit; font-weight: inherit; font-style: normal; }
 .field-invitation h2 { font-size: clamp(80px,9vw,143px); line-height: .97; }
 .statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.01em; }
@@ -110,7 +110,7 @@ textarea { line-height: 1.65; }
 .discipline-expanded .text-link { font-size: 13px; }
 .path-tabs>button { font-family: var(--type-ui); font-size: 16px; font-weight: 600; letter-spacing: .015em; }
 .path-tabs small { font-family: var(--type-mono); font-size: 9px; letter-spacing: .035em; }
-.path-panel h3 { font-family: var(--type-display); font-weight: 400; font-size: clamp(35px,3.9vw,57px); line-height: 1.12; letter-spacing: -.028em; }
+.path-panel h3 { font-family: var(--type-display); font-weight: 600; font-size: clamp(35px,3.9vw,57px); line-height: 1.12; letter-spacing: -.028em; }
 .path-panel .eyebrow { font-size: 9px; }
 .instrument-caption { font-size: 9px; letter-spacing: .025em; }
 .path-diagram text { font-size: 11px; letter-spacing: .035em; }
@@ -118,7 +118,7 @@ textarea { line-height: 1.65; }
 .field-home .faq-list details>p,.faq-list details>p { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.008em; }
 .faq-list summary>.mono { font-size: 10px; }
 /* Secondary pages use the same roles, not a new font for each route. */
-.page-intro h1 { font-family: var(--type-display); font-weight: 400; font-size: clamp(58px,7.2vw,108px); letter-spacing: -.028em; line-height: 1.07; max-width: 1010px; }
+.page-intro h1 { font-family: var(--type-display); font-weight: 600; font-size: clamp(58px,7.2vw,108px); letter-spacing: -.028em; line-height: 1.07; max-width: 1010px; }
 .intro-description,.intro-description>p { font-family: var(--type-reading); font-size: 18px; line-height: 1.7; letter-spacing: -.01em; }
 .service-catalogue h2,.process-list h2,.service-body h2,.split-note h2,.studio-principles h3,.global-section h2,.pricing-table h2 { font-family: var(--type-ui); font-weight: 600; letter-spacing: -.035em; line-height: 1.1; }
 .service-catalogue h2 { font-size: clamp(32px,3.7vw,54px); }
@@ -135,10 +135,10 @@ textarea { line-height: 1.65; }
 .pricing-table strong { font-size: 24px; }
 .table-head { font-size: 10px; }
 .country-list>span,.contact-aside dd { font-family: var(--type-ui); font-weight: 600; font-size: 16px; line-height: 1.55; letter-spacing: .005em; }
-.contact-email { font-family: var(--type-display); font-weight: 400; font-size: clamp(35px,3.8vw,57px); line-height: 1.1; letter-spacing: -.028em; }
+.contact-email { font-family: var(--type-display); font-weight: 600; font-size: clamp(35px,3.8vw,57px); line-height: 1.1; letter-spacing: -.028em; }
 .contact-aside>.small { font-family: var(--type-reading); font-size: 14px; line-height: 1.7; }
 .contact-aside dt { font-size: 10px; }
-.inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-family: var(--type-display); font-weight: 400; font-size: 40px; line-height: 1.12; letter-spacing: -.04em; }
+.inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-family: var(--type-display); font-weight: 600; font-size: 40px; line-height: 1.12; letter-spacing: -.04em; }
 .inquiry-form label { font-family: var(--type-ui); font-size: 15px; font-weight: 600; letter-spacing: .015em; }
 .inquiry-form input,.inquiry-form select,.inquiry-form textarea { font-family: var(--type-ui); font-size: 16px; font-weight: 600; letter-spacing: .015em; line-height: 1.5; }
 .inquiry-form p.small,.inquiry-success p:not(.eyebrow),.inquiry-form .small { font-family: var(--type-reading); font-size: 14px; line-height: 1.65; }
@@ -152,12 +152,12 @@ textarea { line-height: 1.65; }
 .desk-list .mono,.desk-list small,.status-label { font-size: 11px; }
 .detail-grid dd { font-size: 16px; }
 .footer-top .eyebrow { font-size: 10px; }
-.footer-cta { font-family: var(--type-display); font-size: clamp(36px,4.5vw,70px); font-weight: 400; letter-spacing: -.028em; line-height: 1.15; max-width: 840px; }
+.footer-cta { font-family: var(--type-display); font-size: clamp(36px,4.5vw,70px); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; max-width: 840px; }
 .footer-wordmark { font-family: var(--type-ui); font-weight: 600; font-size: 22vw; line-height: .9; letter-spacing: -.055em; }
 .footer-links { font-family: var(--type-ui); font-size: 14px; font-weight: 600; line-height: 1.6; letter-spacing: .012em; }
 .footer-links>p { font-family: var(--type-reading); font-size: 17px; font-weight: 400; line-height: 1.5; }
 .footer-links p>span,.footer-links>div>span { font-family: var(--type-mono); font-size: 10px; line-height: 1.8; letter-spacing: .005em; }
-.not-found h1 { font-family: var(--type-display); font-weight: 400; letter-spacing: -.055em; }
+.not-found h1 { font-family: var(--type-display); font-weight: 600; letter-spacing: -.055em; }
 @media(min-width:1700px) {
   .field-hero .hero-type h1 { font-size: 142px; }
 }
@@ -262,4 +262,57 @@ textarea { line-height: 1.65; }
   .footer-links p>span,.footer-links>div>span { font-size: 9px; }
   .footer-top .eyebrow { font-size: 9px; }
   .material-controls button { font-size: 11px; }
+}
+
+/* Geometric proportions are wider than the previous editorial serif. */
+.wordmark { font-family: var(--type-display); font-weight: 600; font-size: 30px; letter-spacing: -.065em; }
+.field-hero .hero-type h1 { font-size: clamp(82px,7.5vw,126px); font-weight: 600; line-height: .98; letter-spacing: -.045em; }
+.field-hero .hero-type h1>.hero-question { font-size: 1em; text-transform: uppercase; line-height: .99; letter-spacing: -.045em; font-weight: 600; }
+.field-hero .hero-type h1>.hero-outcome { font-size: .72em; line-height: 1.08; margin-top: 28px; letter-spacing: -.025em; }
+.hero-summary>p { font-size: 17px; line-height: 1.65; letter-spacing: .005em; }
+.field-statement h2,.field-principle h2 { font-size: clamp(50px,5.8vw,92px); line-height: 1.09; letter-spacing: -.055em; }
+.field-invitation h2 { font-size: clamp(72px,8vw,126px); line-height: 1.04; letter-spacing: -.06em; }
+.page-intro h1 { font-size: clamp(53px,6.6vw,99px); line-height: 1.11; letter-spacing: -.055em; }
+.path-panel h3 { font-size: clamp(33px,3.3vw,49px); line-height: 1.16; letter-spacing: -.05em; }
+.footer-cta { font-size: clamp(32px,3.6vw,56px); line-height: 1.2; letter-spacing: -.05em; }
+.footer-wordmark { font-family: var(--type-display); font-weight: 600; font-size: 18.4vw; line-height: 1; letter-spacing: -.055em; }
+.contact-email { font-size: clamp(32px,3.1vw,47px); letter-spacing: -.06em; }
+.inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-size: 35px; line-height: 1.2; letter-spacing: -.055em; }
+p,.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p,.intro-description>p,.legal-content p { letter-spacing: .003em; }
+.statement-note>p:first-child,.invitation-note>p { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; }
+.mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress,.brand-caption,.material-control-label { font-size: 11px; letter-spacing: .075em; }
+@media(min-width:1700px) { .field-hero .hero-type h1 { font-size: 126px; } }
+@media(max-width:1100px) {
+ .field-hero .hero-type h1 { font-size: 8.5vw; }
+ .wordmark { font-size: 29px; }
+ .main-nav>a:not(.nav-contact) { font-size: 12px; letter-spacing: .02em; padding-inline: 11px; }
+ .nav-contact { font-size: 12px; }
+}
+@media(max-width:800px) {
+ .field-hero .hero-type h1 { font-size: 11.5vw; }
+ .field-hero .hero-type h1>.hero-outcome { font-size: .72em; }
+ .field-statement h2,.field-principle h2 { font-size: 58px; }
+ .field-invitation h2 { font-size: 76px; }
+ .path-panel h3 { font-size: 39px; }
+ .main-nav>a:not(.nav-contact) { font-size: 21px; padding: 13px; }
+ .nav-contact { font-size: 14px; }
+ .footer-cta { font-size: 38px; }
+}
+@media(max-width:520px) {
+ .wordmark { font-size: 28px; }
+ .field-hero .hero-type h1 { font-size: clamp(45px,13.5vw,70px); }
+ .field-hero .hero-type h1>.hero-question { font-size: 1em; line-height: 1.05; letter-spacing: -.045em; }
+ .field-hero .hero-type h1>.hero-outcome { font-size: .77em; line-height: 1.12; margin-top: 24px; letter-spacing: -.025em; }
+ .field-statement h2,.field-principle h2 { font-size: 44px; line-height: 1.14; letter-spacing: -.06em; }
+ .field-invitation h2 { font-size: 59px; line-height: 1.1; }
+ .page-intro h1 { font-size: 43px; line-height: 1.14; letter-spacing: -.065em; }
+ .path-panel h3 { font-size: 32px; line-height: 1.2; }
+ .footer-cta { font-size: 30px; max-width: 330px; letter-spacing: -.055em; }
+ .contact-email { font-size: 34px; }
+ .inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-size: 29px; }
+ .statement-note>p:first-child,.invitation-note>p { font-size: 20px; line-height: 1.5; }
+ .mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress { font-size: 10px; letter-spacing: .055em; }
+ .hero-kicker { font-size: 9px; }
+ .instrument-caption { font-size: 9px; }
+ .field-hero .hero-bottom .mono { font-size: 9px; }
 }

@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/fonts/arrafed-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/arrafed-utility.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/arrafed-reading.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/gothic-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/industrial-ui.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/humanist-text.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       </head>
       <body className="antialiased"><a className="skip-link" href="#main">Skip to content</a><LiquidSteel /><Header />{children}<Footer /></body>
     </html>
