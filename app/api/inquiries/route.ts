@@ -2,10 +2,11 @@ import {env} from "cloudflare:workers";
 import {and,eq,gte,count} from "drizzle-orm";
 import {getDb} from "@/db";
 import {inquiries} from "@/db/schema";
-import {inquirySchema,validOrigin} from "@/lib/inquiry-validation";
+import {inquirySchema} from "@/lib/inquiry-validation";
+import {validInquiryOrigin,inquiryCors} from "@/lib/inquiry-cors";
 const MAX_FILE=10*1024*1024;
-export async function POST(request:Request){
-  if(!validOrigin(request))return Response.json({error:"Please submit your brief from this website."},{status:403});
+async function submitInquiry(request:Request){
+  if(!validInquiryOrigin(request))return Response.json({error:"Please submit your brief from this website."},{status:403});
   if(request.body){const reader=request.body.getReader();let size=0;const chunks:Uint8Array[]=[];while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>MAX_FILE+100000){await reader.cancel();return Response.json({error:"The upload is too large. Please choose a file under 10 MB."},{status:413});}chunks.push(value);}const body=new Uint8Array(size);let offset=0;for(const chunk of chunks){body.set(chunk,offset);offset+=chunk.length;}request=new Request(request.url,{method:request.method,headers:request.headers,body});}
 
   if(Number(request.headers.get("content-length")??0)>MAX_FILE+100000)return Response.json({error:"The upload is too large. Please choose a file under 10 MB."},{status:413});
@@ -35,3 +36,6 @@ export async function POST(request:Request){
     return Response.json({reference:id},{status:201,headers:{"Cache-Control":"no-store"}});
   }catch(err){if(fileKey&&env.BUCKET)await env.BUCKET.delete(fileKey).catch(()=>{});console.error("Inquiry submission failed",err instanceof Error?err.message:"Unknown error");return Response.json({error:"Your brief could not be saved. Please try again or contact the studio directly."},{status:503});}
 }
+
+export async function POST(request:Request){return inquiryCors(request,await submitInquiry(request));}
+export async function OPTIONS(request:Request){return inquiryCors(request,new Response(null,{status:validInquiryOrigin(request)?204:403}));}

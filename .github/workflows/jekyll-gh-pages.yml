@@ -1,4 +1,4 @@
-name: Publish ARRAFED entry to GitHub Pages
+name: Build and publish ARRAFED on GitHub Pages
 
 on:
   push:
@@ -23,12 +23,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install dependencies
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.25.0 --activate
+          pnpm install --frozen-lockfile
+      - name: Verify application
+        run: |
+          pnpm exec tsc --noEmit
+          node --test tests/*.test.mjs
+          node scripts/verify-backend.mjs
+      - name: Build complete website
+        run: |
+          pnpm build:pages
+          node scripts/verify-pages.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload static entry
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: github-pages
+          path: pages-dist
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v5

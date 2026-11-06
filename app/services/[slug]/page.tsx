@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { services } from "@/lib/content";
-import { PageIntro, Arrow } from "@/components/studio-shell";
+import type {Metadata} from "next";
+import {notFound} from "next/navigation";
+import {services} from "@/lib/content";
+import ServiceDetail from "@/components/service-detail";
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;return {title:services.find(s=>s.id===slug)?.title??"Service"};}
-export default async function Service({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const s=services.find(x=>x.id===slug);if(!s)notFound();return <main id="main" className="page-wrap"><a href="/services" className="back-link">← All expertise</a><PageIntro index={s.number} title={s.line}><p>{s.description}</p></PageIntro><div className="service-body"><div><p className="eyebrow">{s.title}</p><h2>Where we can help.</h2><ul className="capability-list">{s.items.map((item,i)=><li key={item}><span className="mono">{String(i+1).padStart(2,"0")}</span>{item}</li>)}</ul><div className="tools-block"><p className="eyebrow">METHODS / TOOLS / STANDARDS</p><p>{s.tools}</p></div></div><aside className="scope-panel"><p className="eyebrow">THE AGREED OUTCOME</p><p>{s.output}</p><div className="scope-price">{s.starting}</div><p className="small muted">{s.scope}. Final pricing depends on complexity, urgency and requirements.</p><a className="button button-light" href={`/contact?service=${s.id}`}>Discuss this project <Arrow diagonal/></a><a className="text-link" href="/process">How we work <Arrow/></a></aside></div><div className="next-discipline"><span className="eyebrow">NEXT DISCIPLINE</span><a href={`/services/${services[(services.indexOf(s)+1)%5].id}`}>{services[(services.indexOf(s)+1)%5].short}<Arrow diagonal/></a></div></main>;}
+export default async function Service({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const s=services.find(x=>x.id===slug);if(!s)notFound();return <ServiceDetail s={s}/>;}

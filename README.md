@@ -20,11 +20,11 @@ For a standalone checkout, the Sites project profile can be configured with the 
 
 ## GitHub Pages and production
 
-The default `main` branch contains the current application. The production app is https://arrafed-research-studio.chatgpt-team-4613.chatgpt.site/ and runs on Workers with D1 and R2. GitHub Pages is a static entry point at https://nurajannatmitu.github.io/ARRAF-WEBSITE/; it immediately opens the production app so navigation, inquiries and uploads use the same origin and backend.
+The public website runs directly at https://nurajannatmitu.github.io/ARRAF-WEBSITE/. There is no redirect or iframe. `pnpm build:pages` prerenders all public routes from the same React pages, typography, styles and WebGL renderer used by the Worker app, then hydrates the interactive controls. Assets and internal links use `/ARRAF-WEBSITE/`. Direct route folders and legacy `.html` aliases are emitted with canonical URLs; unknown paths render a real 404 page.
 
-`.github/workflows/jekyll-gh-pages.yml` retains the existing workflow path but replaces the old Jekyll build with a static upload of `github-pages/`. It runs on every push to `main`. Source files and server code are not published as static Pages content. `redirect.js` preserves routes, query strings and fragments; old `packages.html` links map to `/pricing`. A custom 404 supports deep links. The destination origin is fixed, and a visible link plus meta refresh provide a no-JavaScript fallback.
+`.github/workflows/jekyll-gh-pages.yml` builds and publishes `pages-dist/` on every push to `main`. Only the generated public website is uploaded. The previous redirect bridge has been removed. Generated output is ignored by git.
 
-Deploy application changes through the Sites source/build workflow before updating the Pages entry destination. Pages is deliberately a bridge to the full app rather than an incomplete static copy.
+The inquiry API and protected administrator desk remain on the existing Worker host. The Pages form sends directly to that API without navigating away and without cookies. Only the exact Pages origin is allowed by the inquiry CORS handler; all input checks, file checks and rate limits remain in force. Administrator routes retain same-origin checks and identity/allowlist enforcement. Deploy Worker API changes with the Sites build/publish workflow. The public website can be deployed independently through GitHub Actions.
 
 ## Administrator
 
