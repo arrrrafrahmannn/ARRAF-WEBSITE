@@ -18,6 +18,14 @@ node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1
 
 For a standalone checkout, the Sites project profile can be configured with the Sites setup helpers; the app uses the supplied Workers hosting integration. Hosted deployment applies committed migrations. GitHub stores the source; GitHub Pages cannot run the Worker backend. The deployed service runs on Sites/Cloudflare.
 
+## GitHub Pages and production
+
+The default `main` branch contains the current application. The production app is https://arrafed-research-studio.chatgpt-team-4613.chatgpt.site/ and runs on Workers with D1 and R2. GitHub Pages is a static entry point at https://nurajannatmitu.github.io/ARRAF-WEBSITE/; it immediately opens the production app so navigation, inquiries and uploads use the same origin and backend.
+
+`.github/workflows/jekyll-gh-pages.yml` retains the existing workflow path but replaces the old Jekyll build with a static upload of `github-pages/`. It runs on every push to `main`. Source files and server code are not published as static Pages content. `redirect.js` preserves routes, query strings and fragments; old `packages.html` links map to `/pricing`. A custom 404 supports deep links. The destination origin is fixed, and a visible link plus meta refresh provide a no-JavaScript fallback.
+
+Deploy application changes through the Sites source/build workflow before updating the Pages entry destination. Pages is deliberately a bridge to the full app rather than an incomplete static copy.
+
 ## Administrator
 
 Set the runtime secret `ADMIN_EMAILS` to a comma-separated administrator email allowlist using the hosting environment settings. Never put credentials in the repository. `/admin` uses hosting-provided ChatGPT identity and a server-side allowlist. Missing configuration fails closed. Public inquiry endpoints do not expose saved records or attachment keys. Files are downloaded only through an authenticated administrator route. Other hosting providers must replace the platform identity adapter and validate sessions server-side.
