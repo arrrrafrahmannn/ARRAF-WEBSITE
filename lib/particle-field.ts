@@ -1,6 +1,7 @@
 /** Reproducible seed buffer: particle motion stays on the GPU. */
-export const DESKTOP_PARTICLES = 1400;
-export const MOBILE_PARTICLES = 640;
+export const PARTICLE_COUNT = 10000;
+export const DESKTOP_PARTICLES = PARTICLE_COUNT;
+export const MOBILE_PARTICLES = PARTICLE_COUNT;
 export const CHROME_FORMS = 12;
 export const METAL_RIBBONS = 3;
 export function particleSeeds(count = DESKTOP_PARTICLES, seed = 42931) {
@@ -10,6 +11,7 @@ export function particleSeeds(count = DESKTOP_PARTICLES, seed = 42931) {
   for (let i = 0; i < values.length; i++) values[i] = next();
   return values;
 }
-export function particleCount(mobile: boolean, quality: number) {
-  return Math.round((mobile ? MOBILE_PARTICLES : DESKTOP_PARTICLES) * (.65 + .35 * Math.max(.42, Math.min(1, quality))));
+/** Keep the requested density; adaptation changes resolution, never the draw count. */
+export function particleCount() {
+  return PARTICLE_COUNT;
 }

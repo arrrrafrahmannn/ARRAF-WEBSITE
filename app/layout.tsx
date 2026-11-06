@@ -3,6 +3,7 @@ import "./globals.css";
 import "./liquid-glass.css";
 import "./material-field.css";
 import "./typography.css";
+import "./menu-light.css";
 import LiquidSteel from "@/components/liquid-steel";
 import { Header, Footer } from "@/components/studio-shell";
 
@@ -26,8 +27,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/fonts/gothic-display.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/industrial-ui.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/humanist-text.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       </head>
       <body className="antialiased"><a className="skip-link" href="#main">Skip to content</a><LiquidSteel /><Header />{children}<Footer /></body>
     </html>

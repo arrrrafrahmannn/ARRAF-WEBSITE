@@ -144,7 +144,7 @@ export default function LiquidSteel() {
             gl.uniform2f(particleUniforms.pointer, animate ? x : 0, animate ? y : 0);
             gl.uniform1f(particleUniforms.time, elapsed); gl.uniform1f(particleUniforms.progress, visualProgress);
             gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
-            gl.drawArrays(gl.POINTS, 0, particleCount(mobile(), quality));
+            gl.drawArrays(gl.POINTS, 0, particleCount());
             gl.disable(gl.BLEND); if (seedAttribute !== positionAttribute) gl.disableVertexAttribArray(seedAttribute);
             gl.useProgram(program);
           }

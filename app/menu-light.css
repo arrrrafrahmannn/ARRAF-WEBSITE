@@ -1,0 +1,48 @@
+/* A soft silver light across the rail and a brighter plate beneath the hovered item. */
+.main-nav {
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.main-nav:hover,
+.main-nav:focus-within {
+  background-color: rgba(30,38,29,.92);
+  border-color: rgba(235,249,215,.64);
+  box-shadow: inset 0 1px 0 rgba(255,255,238,.32), 0 0 25px rgba(218,242,194,.14), 0 10px 35px rgba(0,0,0,.28);
+}
+.main-nav>a {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, text-shadow 180ms ease, box-shadow 180ms ease;
+}
+.main-nav>a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 0%,rgba(245,255,228,.24),rgba(217,239,194,.06) 75%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.main-nav>a:is(:hover,:focus-visible) {
+  color: #fcfff5;
+  background-color: rgba(217,239,194,.11);
+  border-color: rgba(237,255,213,.5);
+  text-shadow: 0 0 13px rgba(244,255,226,.6);
+  box-shadow: inset 0 1px 0 rgba(255,255,239,.36), 0 0 18px rgba(218,244,186,.14);
+}
+.main-nav>a:is(:hover,:focus-visible)::before { opacity: 1; }
+.main-nav>a:focus-visible { outline: 2px solid #efffe0; outline-offset: 3px; }
+.main-nav>a[aria-current=page] { background-color: rgba(222,243,202,.15); border-color: rgba(228,249,208,.25); color: #f4ffe8; }
+.main-nav>a[aria-current=page]:hover { border-color: rgba(237,255,213,.62); background-color: rgba(227,247,205,.22); }
+.menu-toggle:is(:hover,:focus-visible,[aria-expanded=true]) { color: #fbfff5; border-color: rgba(237,255,213,.62); background-color: rgba(217,239,194,.18); box-shadow: inset 0 1px 0 rgba(255,255,239,.32),0 0 20px rgba(218,244,186,.18); text-shadow: 0 0 12px rgba(244,255,226,.45); }
+@media (min-width:801px) and (max-width:900px) {
+ .menu-toggle { display: block; padding: 11px 17px; border: 1px solid rgba(225,236,203,.3); border-radius: 99px; background: rgba(8,16,10,.8); font-size: 13px; }
+ .main-nav { display: none; position: absolute; left: 0; right: 0; top: 78px; padding: 20px; border-radius: 23px; background: rgba(7,16,9,.97); }
+ .main-nav.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 7px; }
+ .main-nav>a:not(.nav-contact) { font-size: 21px; padding: 13px; }
+ .nav-contact { margin: 12px 0 0; padding: 14px 17px; font-size: 14px; }
+}
+@media(prefers-reduced-motion:reduce) { .main-nav,.main-nav>a,.main-nav>a::before { transition: none; } }

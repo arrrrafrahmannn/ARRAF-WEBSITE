@@ -6,39 +6,11 @@
   font-weight: 600;
   font-display: swap;
 }
-@font-face {
-  font-family: 'LM Sans Interface';
-  src: url('/fonts/industrial-ui.woff') format('woff');
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LM Sans Text';
-  src: url('/fonts/humanist-text.woff') format('woff');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LM Sans Text';
-  src: url('/fonts/humanist-oblique.woff') format('woff');
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LM Mono Condensed';
-  src: url('/fonts/technical-mono.woff') format('woff');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
 :root {
   --type-display: 'URW Gothic Display', 'Century Gothic', sans-serif;
-  --type-reading: 'LM Sans Text', 'Trebuchet MS', sans-serif;
-  --type-ui: 'LM Sans Interface', 'Trebuchet MS', sans-serif;
-  --type-mono: 'LM Mono Condensed', 'Courier New', monospace;
+  --type-reading: var(--type-display);
+  --type-ui: var(--type-display);
+  --type-mono: var(--type-display);
 }
 @theme {
   --font-sans: var(--type-ui);
@@ -55,7 +27,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 h1,h2,h3,h4 { font-family: var(--type-ui); font-weight: 600; letter-spacing: -.028em; }
-p { font-family: var(--type-reading); font-weight: 400; font-size: 17px; line-height: 1.72; letter-spacing: -.008em; }
+p { font-family: var(--type-reading); font-weight: 600; font-size: 17px; line-height: 1.72; letter-spacing: -.008em; }
 button,input,select,textarea,label,summary { font-family: var(--type-ui); font-weight: 600; }
 input,select,textarea { letter-spacing: .012em; font-size: 16px; }
 textarea { line-height: 1.65; }
@@ -63,7 +35,7 @@ textarea { line-height: 1.65; }
 .form-progress,.table-head,.range-ends,.status-label,.reference-code,.instrument-caption,.statement-aside,
 .contact-aside dt,.detail-grid dt,.path-tabs small,.discipline-number,.path-diagram text {
   font-family: var(--type-mono);
-  font-weight: 400;
+  font-weight: 600;
   font-style: normal;
   font-variant-numeric: lining-nums tabular-nums;
   letter-spacing: .055em;
@@ -98,13 +70,13 @@ textarea { line-height: 1.65; }
 .field-home h2 em { font-family: inherit; font-weight: inherit; font-style: normal; }
 .field-invitation h2 { font-size: clamp(80px,9vw,143px); line-height: .97; }
 .statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.01em; }
-.statement-note>p:first-child { font-family: var(--type-reading); font-style: italic; font-size: 24px; line-height: 1.35; letter-spacing: -.025em; }
-.invitation-note>p { font-family: var(--type-reading); font-style: italic; font-size: 23px; line-height: 1.45; letter-spacing: -.025em; }
+.statement-note>p:first-child { font-family: var(--type-reading); font-style: normal; font-size: 24px; line-height: 1.35; letter-spacing: -.025em; }
+.invitation-note>p { font-family: var(--type-reading); font-style: normal; font-size: 23px; line-height: 1.45; letter-spacing: -.025em; }
 .statement-aside { font-size: 9px; line-height: 1.85; }
 .field-statement .section-label>.mono { font-size: 9px; letter-spacing: .025em; }
 .field-section-heading>p { font-family: var(--type-reading); font-size: 15px; line-height: 1.6; letter-spacing: -.01em; }
 .discipline-name { font-family: var(--type-ui); font-size: clamp(28px,3.1vw,46px); font-weight: 600; line-height: 1.1; letter-spacing: -.03em; }
-.discipline-line { font-family: var(--type-reading); font-weight: 400; font-size: 15px; line-height: 1.5; letter-spacing: -.012em; }
+.discipline-line { font-family: var(--type-reading); font-weight: 600; font-size: 15px; line-height: 1.5; letter-spacing: -.012em; }
 .discipline-number { font-size: 11px; }
 .discipline-expanded .mono { font-family: var(--type-mono); font-size: 10px; line-height: 1.8; letter-spacing: .015em; }
 .discipline-expanded .text-link { font-size: 13px; }
@@ -128,7 +100,7 @@ textarea { line-height: 1.65; }
 .tools-block>.eyebrow { font-family: var(--type-mono); font-size: 10px; }
 .scope-panel>.eyebrow { font-size: 10px; }
 .scope-panel .small,.pricing-table p,.estimate-controls p.small { font-size: 14px; line-height: 1.65; }
-.scope-price,.estimate-price strong,.pricing-table strong,.estimate-heading output,.desk-counts strong,.process-number { font-family: var(--type-mono); font-weight: 400; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.055em; }
+.scope-price,.estimate-price strong,.pricing-table strong,.estimate-heading output,.desk-counts strong,.process-number { font-family: var(--type-mono); font-weight: 600; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.055em; }
 .process-number { font-size: 56px; line-height: 1.1; }
 .scope-price { font-size: 29px; }
 .estimate-price strong { font-size: 48px; }
@@ -143,7 +115,7 @@ textarea { line-height: 1.65; }
 .inquiry-form input,.inquiry-form select,.inquiry-form textarea { font-family: var(--type-ui); font-size: 16px; font-weight: 600; letter-spacing: .015em; line-height: 1.5; }
 .inquiry-form p.small,.inquiry-success p:not(.eyebrow),.inquiry-form .small { font-family: var(--type-reading); font-size: 14px; line-height: 1.65; }
 .form-progress { font-size: 10px; letter-spacing: .015em; }
-.inquiry-form .consent { font-family: var(--type-reading); font-size: 13px; font-weight: 400; line-height: 1.65; letter-spacing: 0; }
+.inquiry-form .consent { font-family: var(--type-reading); font-size: 13px; font-weight: 600; line-height: 1.65; letter-spacing: 0; }
 .form-actions .button { font-size: 14px; }
 .form-error { font-family: var(--type-ui); font-size: 15px; font-weight: 600; line-height: 1.5; letter-spacing: .005em; }
 .legal-content h2 { font-family: var(--type-ui); font-size: 31px; font-weight: 600; letter-spacing: -.03em; }
@@ -155,7 +127,7 @@ textarea { line-height: 1.65; }
 .footer-cta { font-family: var(--type-display); font-size: clamp(36px,4.5vw,70px); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; max-width: 840px; }
 .footer-wordmark { font-family: var(--type-ui); font-weight: 600; font-size: 22vw; line-height: .9; letter-spacing: -.055em; }
 .footer-links { font-family: var(--type-ui); font-size: 14px; font-weight: 600; line-height: 1.6; letter-spacing: .012em; }
-.footer-links>p { font-family: var(--type-reading); font-size: 17px; font-weight: 400; line-height: 1.5; }
+.footer-links>p { font-family: var(--type-reading); font-size: 17px; font-weight: 600; line-height: 1.5; }
 .footer-links p>span,.footer-links>div>span { font-family: var(--type-mono); font-size: 10px; line-height: 1.8; letter-spacing: .005em; }
 .not-found h1 { font-family: var(--type-display); font-weight: 600; letter-spacing: -.055em; }
 @media(min-width:1700px) {
@@ -316,3 +288,11 @@ p,.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principl
  .instrument-caption { font-size: 9px; }
  .field-hero .hero-bottom .mono { font-size: 9px; }
 }
+
+/* One face throughout, including captions, diagrams, forms, figures and reading text. */
+body { font-family: var(--type-display); }
+body :is(button,input,select,textarea,code,pre,kbd,output,summary,label,svg text) { font-family: var(--type-display); }
+.main-nav>a:not(.nav-contact) { letter-spacing: .015em; }
+p,.intro-description>p,.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { line-height: 1.8; letter-spacing: -.015em; }
+.mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress,.brand-caption,.material-control-label { letter-spacing: .035em; }
+.footer-wordmark { font-size: 18.4vw; }
