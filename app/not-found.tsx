@@ -1,0 +1,1 @@
+export default function NotFound(){return <main id="main" className="page-wrap not-found"><p className="eyebrow">404 / OUTSIDE THE SCOPE</p><h1>A question<br/>of direction.</h1><p>We could not find this page. Start again at the studio.</p><a className="button button-light" href="/">Back to ARRAFED ↗</a></main>;}

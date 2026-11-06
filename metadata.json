@@ -1,6 +1,0 @@
-{
-  "name": "ARRAFED",
-  "description": "Professional academic assistance, writing, editing, research, and data analysis service for university students.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

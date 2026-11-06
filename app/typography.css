@@ -1,0 +1,298 @@
+/* ARRAFED type: geometric display / humanist reading / condensed annotation. */
+@font-face {
+  font-family: 'URW Gothic Display';
+  src: url('/fonts/gothic-display.woff') format('woff');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+:root {
+  --type-display: 'URW Gothic Display', 'Century Gothic', sans-serif;
+  --type-reading: var(--type-display);
+  --type-ui: var(--type-display);
+  --type-mono: var(--type-display);
+}
+@theme {
+  --font-sans: var(--type-ui);
+  --font-reading: var(--type-reading);
+  --font-mono: var(--type-mono);
+}
+body {
+  font-family: var(--type-ui);
+  font-weight: 600;
+  font-size: 16px;
+  font-synthesis: none;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+}
+h1,h2,h3,h4 { font-family: var(--type-ui); font-weight: 600; letter-spacing: -.028em; }
+p { font-family: var(--type-reading); font-weight: 600; font-size: 17px; line-height: 1.72; letter-spacing: -.008em; }
+button,input,select,textarea,label,summary { font-family: var(--type-ui); font-weight: 600; }
+input,select,textarea { letter-spacing: .012em; font-size: 16px; }
+textarea { line-height: 1.65; }
+.mono,.eyebrow,code,kbd,output,.brand-caption,.material-control-label,.hero-meta,.hero-kicker,.hero-bottom>.mono,
+.form-progress,.table-head,.range-ends,.status-label,.reference-code,.instrument-caption,.statement-aside,
+.contact-aside dt,.detail-grid dt,.path-tabs small,.discipline-number,.path-diagram text {
+  font-family: var(--type-mono);
+  font-weight: 600;
+  font-style: normal;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: .055em;
+}
+.mono,.eyebrow,.field-home .eyebrow,.section-label .eyebrow,
+.field-home .section-heading .eyebrow,.page-intro>.eyebrow { font-size: 10px; line-height: 1.65; }
+.wordmark { font-family: var(--type-ui); font-size: 33px; font-weight: 600; letter-spacing: -.028em; line-height: 1; }
+.brand-caption { font-size: 9px; line-height: 1.45; letter-spacing: .025em; }
+.main-nav>a:not(.nav-contact) { font-family: var(--type-ui); font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding-inline: 16px; }
+.nav-contact,.button,.field-home .button { font-family: var(--type-ui); font-size: 14px; font-weight: 600; letter-spacing: .025em; }
+.nav-contact { font-size: 13px; letter-spacing: .025em; }
+.text-link,.field-home .text-link,.field-guide-link,.explore-link,.menu-toggle { font-family: var(--type-ui); font-size: 14px; font-weight: 600; letter-spacing: .02em; }
+.material-controls button { font-family: var(--type-ui); font-size: 12px; letter-spacing: .02em; }
+.material-control-label { font-size: 9px; }
+/* The question is editorial; the outcome is compact and engineered. */
+.field-hero .hero-type { width: 62%; }
+.field-hero .hero-type h1 { font-family: var(--type-display); font-size: clamp(88px,8.5vw,142px); font-weight: 600; line-height: .95; letter-spacing: -.028em; }
+.field-hero .hero-type h1>.hero-question { display: block; font-family: var(--type-display); font-size: 1em; font-weight: 600; font-style: normal; color: #f0f0e5; margin: 0; line-height: 1.02; letter-spacing: -.028em; }
+.field-hero .hero-type h1>.hero-outcome { display: block; font-family: var(--type-ui); font-size: .65em; font-weight: 600; font-style: normal; text-transform: uppercase; color: #c3cfb6; letter-spacing: -.018em; line-height: 1.02; margin-top: clamp(38px,4vw,62px); }
+.hero-summary { max-width: 345px; margin-top: 30px; }
+.hero-summary>p { font-family: var(--type-reading); font-size: 18px; line-height: 1.6; letter-spacing: -.012em; }
+.field-hero .hero-meta { font-family: var(--type-mono); font-size: 10px; line-height: 1.6; letter-spacing: .025em; }
+.hero-kicker { font-family: var(--type-mono); font-size: 9px; line-height: 1.75; letter-spacing: .025em; max-width: 460px; margin-bottom: 29px; }
+.field-hero .hero-bottom .mono { font-size: 9px; line-height: 1.7; letter-spacing: .025em; }
+.field-hero .hero-bottom .explore-link { font-family: var(--type-ui); font-size: 13px; letter-spacing: .025em; }
+.field-guide>.eyebrow { font-size: 9px; letter-spacing: .025em; }
+.field-guide>p:not(.eyebrow) { font-family: var(--type-reading); font-size: 23px; line-height: 1.3; letter-spacing: -.025em; }
+.field-guide-link { font-size: 12px; }
+/* Narrative headings and functional headings have different voices and spacing. */
+.field-home h2 { font-family: var(--type-ui); font-weight: 600; font-size: clamp(48px,5.8vw,90px); letter-spacing: -.035em; line-height: 1.03; }
+.field-statement h2,.field-principle h2,.field-invitation h2 { font-family: var(--type-display); font-weight: 600; font-size: clamp(56px,6.8vw,108px); letter-spacing: -.028em; line-height: 1.03; }
+.field-home h2 em { font-family: inherit; font-weight: inherit; font-style: normal; }
+.field-invitation h2 { font-size: clamp(80px,9vw,143px); line-height: .97; }
+.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.01em; }
+.statement-note>p:first-child { font-family: var(--type-reading); font-style: normal; font-size: 24px; line-height: 1.35; letter-spacing: -.025em; }
+.invitation-note>p { font-family: var(--type-reading); font-style: normal; font-size: 23px; line-height: 1.45; letter-spacing: -.025em; }
+.statement-aside { font-size: 9px; line-height: 1.85; }
+.field-statement .section-label>.mono { font-size: 9px; letter-spacing: .025em; }
+.field-section-heading>p { font-family: var(--type-reading); font-size: 15px; line-height: 1.6; letter-spacing: -.01em; }
+.discipline-name { font-family: var(--type-ui); font-size: clamp(28px,3.1vw,46px); font-weight: 600; line-height: 1.1; letter-spacing: -.03em; }
+.discipline-line { font-family: var(--type-reading); font-weight: 600; font-size: 15px; line-height: 1.5; letter-spacing: -.012em; }
+.discipline-number { font-size: 11px; }
+.discipline-expanded .mono { font-family: var(--type-mono); font-size: 10px; line-height: 1.8; letter-spacing: .015em; }
+.discipline-expanded .text-link { font-size: 13px; }
+.path-tabs>button { font-family: var(--type-ui); font-size: 16px; font-weight: 600; letter-spacing: .015em; }
+.path-tabs small { font-family: var(--type-mono); font-size: 9px; letter-spacing: .035em; }
+.path-panel h3 { font-family: var(--type-display); font-weight: 600; font-size: clamp(35px,3.9vw,57px); line-height: 1.12; letter-spacing: -.028em; }
+.path-panel .eyebrow { font-size: 9px; }
+.instrument-caption { font-size: 9px; letter-spacing: .025em; }
+.path-diagram text { font-size: 11px; letter-spacing: .035em; }
+.field-home .faq-list summary,.faq-list summary { font-family: var(--type-ui); font-size: 20px; font-weight: 600; letter-spacing: -.01em; line-height: 1.3; }
+.field-home .faq-list details>p,.faq-list details>p { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.008em; }
+.faq-list summary>.mono { font-size: 10px; }
+/* Secondary pages use the same roles, not a new font for each route. */
+.page-intro h1 { font-family: var(--type-display); font-weight: 600; font-size: clamp(58px,7.2vw,108px); letter-spacing: -.028em; line-height: 1.07; max-width: 1010px; }
+.intro-description,.intro-description>p { font-family: var(--type-reading); font-size: 18px; line-height: 1.7; letter-spacing: -.01em; }
+.service-catalogue h2,.process-list h2,.service-body h2,.split-note h2,.studio-principles h3,.global-section h2,.pricing-table h2 { font-family: var(--type-ui); font-weight: 600; letter-spacing: -.035em; line-height: 1.1; }
+.service-catalogue h2 { font-size: clamp(32px,3.7vw,54px); }
+.service-catalogue p,.scope-panel>p:not(.eyebrow):not(.small),.process-list article>p,.split-note p,.about-columns p,.studio-principles p,.global-section p:not(.eyebrow),.pricing-table p,.estimator p,.legal-content p,.desk-empty p,.brief-body { font-family: var(--type-reading); font-size: 17px; line-height: 1.75; letter-spacing: -.01em; }
+.service-chips>span,.capability-list li,.tools-block>p:last-child { font-family: var(--type-ui); font-weight: 600; font-size: 14px; line-height: 1.5; letter-spacing: .005em; }
+.capability-list li { font-size: 17px; line-height: 1.45; }
+.tools-block>.eyebrow { font-family: var(--type-mono); font-size: 10px; }
+.scope-panel>.eyebrow { font-size: 10px; }
+.scope-panel .small,.pricing-table p,.estimate-controls p.small { font-size: 14px; line-height: 1.65; }
+.scope-price,.estimate-price strong,.pricing-table strong,.estimate-heading output,.desk-counts strong,.process-number { font-family: var(--type-mono); font-weight: 600; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.055em; }
+.process-number { font-size: 56px; line-height: 1.1; }
+.scope-price { font-size: 29px; }
+.estimate-price strong { font-size: 48px; }
+.pricing-table strong { font-size: 24px; }
+.table-head { font-size: 10px; }
+.country-list>span,.contact-aside dd { font-family: var(--type-ui); font-weight: 600; font-size: 16px; line-height: 1.55; letter-spacing: .005em; }
+.contact-email { font-family: var(--type-display); font-weight: 600; font-size: clamp(35px,3.8vw,57px); line-height: 1.1; letter-spacing: -.028em; }
+.contact-aside>.small { font-family: var(--type-reading); font-size: 14px; line-height: 1.7; }
+.contact-aside dt { font-size: 10px; }
+.inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-family: var(--type-display); font-weight: 600; font-size: 40px; line-height: 1.12; letter-spacing: -.04em; }
+.inquiry-form label { font-family: var(--type-ui); font-size: 15px; font-weight: 600; letter-spacing: .015em; }
+.inquiry-form input,.inquiry-form select,.inquiry-form textarea { font-family: var(--type-ui); font-size: 16px; font-weight: 600; letter-spacing: .015em; line-height: 1.5; }
+.inquiry-form p.small,.inquiry-success p:not(.eyebrow),.inquiry-form .small { font-family: var(--type-reading); font-size: 14px; line-height: 1.65; }
+.form-progress { font-size: 10px; letter-spacing: .015em; }
+.inquiry-form .consent { font-family: var(--type-reading); font-size: 13px; font-weight: 600; line-height: 1.65; letter-spacing: 0; }
+.form-actions .button { font-size: 14px; }
+.form-error { font-family: var(--type-ui); font-size: 15px; font-weight: 600; line-height: 1.5; letter-spacing: .005em; }
+.legal-content h2 { font-family: var(--type-ui); font-size: 31px; font-weight: 600; letter-spacing: -.03em; }
+.legal-content { max-width: 795px; }
+.desk-list strong,.desk-search,.detail-grid dd { font-family: var(--type-ui); font-weight: 600; letter-spacing: .005em; }
+.desk-list .mono,.desk-list small,.status-label { font-size: 11px; }
+.detail-grid dd { font-size: 16px; }
+.footer-top .eyebrow { font-size: 10px; }
+.footer-cta { font-family: var(--type-display); font-size: clamp(36px,4.5vw,70px); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; max-width: 840px; }
+.footer-wordmark { font-family: var(--type-ui); font-weight: 600; font-size: 22vw; line-height: .9; letter-spacing: -.055em; }
+.footer-links { font-family: var(--type-ui); font-size: 14px; font-weight: 600; line-height: 1.6; letter-spacing: .012em; }
+.footer-links>p { font-family: var(--type-reading); font-size: 17px; font-weight: 600; line-height: 1.5; }
+.footer-links p>span,.footer-links>div>span { font-family: var(--type-mono); font-size: 10px; line-height: 1.8; letter-spacing: .005em; }
+.not-found h1 { font-family: var(--type-display); font-weight: 600; letter-spacing: -.055em; }
+@media(min-width:1700px) {
+  .field-hero .hero-type h1 { font-size: 142px; }
+}
+@media(max-width:1100px) {
+  .main-nav>a:not(.nav-contact) { padding-inline: 13px; font-size: 13px; }
+  .nav-contact { font-size: 12px; padding-inline: 15px; }
+  .field-hero .hero-type { width: 66%; }
+  .field-hero .hero-type h1 { font-size: 10.1vw; }
+  .discipline summary { grid-template-columns: 35px 1fr .75fr 20px; gap: 20px; }
+  .scope-price { font-size: 25px; }
+}
+@media(max-width:800px) {
+  .wordmark { font-size: 32px; }
+  .main-nav>a:not(.nav-contact) { font-size: 22px; padding: 13px; letter-spacing: .025em; }
+  .nav-contact { font-size: 14px; }
+  .menu-toggle { font-size: 13px; letter-spacing: .025em; }
+  .field-hero .hero-type { width: 90%; }
+  .field-hero .hero-type h1 { font-size: 14.5vw; }
+  .field-hero .hero-type h1>.hero-outcome { font-size: .63em; }
+  .hero-kicker { font-size: 9px; max-width: 400px; }
+  .hero-summary>p { font-size: 17px; }
+  .field-home h2 { font-size: 55px; }
+  .field-statement h2,.field-principle h2 { font-size: 68px; }
+  .field-invitation h2 { font-size: 88px; }
+  .discipline-name { font-size: 35px; }
+  .discipline summary { grid-template-columns: 30px 1fr 20px; }
+  .path-panel h3 { font-size: 43px; }
+  .field-section-heading>p { font-size: 15px; }
+  .footer-links { font-size: 13px; }
+  .footer-cta { font-size: 46px; }
+  .intro-description,.intro-description>p { font-size: 17px; }
+}
+@media(max-width:520px) {
+  .wordmark { font-size: 30px; }
+  .field-hero .hero-meta { font-size: 9px; gap: 18px; align-items: flex-start; }
+  .field-hero .hero-meta>span:first-child { max-width: 160px; }
+  .field-hero .hero-meta>span:last-child { max-width: 105px; }
+  .field-hero .hero-type { width: 100%; padding-top: 47px; }
+  .field-hero .hero-type h1 { font-size: clamp(63px,17vw,88px); }
+  .field-hero .hero-type h1>.hero-question { letter-spacing: -.03em; line-height: 1.02; }
+  .field-hero .hero-type h1>.hero-outcome { font-size: .68em; line-height: 1.04; margin-top: 38px; letter-spacing: -.025em; }
+  .hero-kicker { font-size: 8px; max-width: 275px; line-height: 1.75; letter-spacing: .015em; margin-bottom: 28px; }
+  .hero-summary { max-width: 255px; margin-top: 27px; }
+  .hero-summary>p { font-size: 17px; line-height: 1.6; }
+  .hero-summary>.button { font-size: 13px; }
+  .field-guide { max-width: 206px; }
+  .field-guide>.eyebrow { font-size: 8px; }
+  .field-guide>p:not(.eyebrow) { font-size: 22px; }
+  .field-guide-link { font-size: 12px; }
+  .field-hero .hero-bottom .mono { font-size: 8px; max-width: 185px; line-height: 1.7; letter-spacing: .005em; }
+  .field-hero .hero-bottom .explore-link { font-size: 12px; }
+  .field-hero .hero-bottom { padding-block: 16px; }
+  .field-home h2 { font-size: 43px; letter-spacing: -.04em; line-height: 1.08; }
+  .field-statement h2,.field-principle h2 { font-size: 52px; letter-spacing: -.028em; line-height: 1.08; }
+  .field-invitation h2 { font-size: 74px; letter-spacing: -.03em; line-height: 1.02; }
+  .field-home .eyebrow,.page-intro>.eyebrow,.section-label .eyebrow { font-size: 9px; letter-spacing: .025em; }
+  .statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { font-size: 16px; line-height: 1.72; }
+  .statement-note>p:first-child,.invitation-note>p { font-size: 23px; line-height: 1.4; }
+  .statement-aside { font-size: 9px; }
+  .discipline summary { grid-template-columns: 22px 1fr 18px; gap: 11px; }
+  .discipline-name { font-size: 29px; line-height: 1.1; }
+  .discipline-number { font-size: 10px; }
+  .discipline-expanded .mono { font-size: 9px; line-height: 1.8; }
+  .discipline-expanded .text-link { font-size: 13px; }
+  .field-home .text-link { font-size: 13px; }
+  .path-tabs>button { font-size: 14px; padding: 11px 10px; }
+  .path-tabs small { font-size: 9px; }
+  .path-panel h3 { font-size: 36px; line-height: 1.14; }
+  .instrument-caption { font-size: 8px; }
+  .field-home .faq-list summary,.faq-list summary { font-size: 18px; line-height: 1.35; }
+  .field-home .faq-list details>p,.faq-list details>p { font-size: 16px; line-height: 1.75; }
+  .faq-list summary>.mono { font-size: 9px; }
+  .page-intro h1 { font-size: 50px; line-height: 1.09; letter-spacing: -.028em; }
+  .intro-description,.intro-description>p { font-size: 17px; line-height: 1.7; }
+  .service-catalogue h2 { font-size: 30px; line-height: 1.12; }
+  .service-catalogue p,.scope-panel>p:not(.eyebrow):not(.small),.process-list article>p,.split-note p,.about-columns p,.studio-principles p,.global-section p:not(.eyebrow),.estimator p,.legal-content p,.desk-empty p,.brief-body { font-size: 16px; line-height: 1.72; }
+  .service-chips>span { font-size: 13px; }
+  .capability-list li { font-size: 16px; }
+  .process-list h2 { font-size: 32px; line-height: 1.15; }
+  .process-number { font-size: 35px; line-height: 1.1; }
+  .scope-price { font-size: 25px; }
+  .pricing-table h2 { font-size: 23px; }
+  .pricing-table p { font-size: 13px; }
+  .pricing-table strong { font-size: 17px; letter-spacing: -.065em; }
+  .table-head { font-size: 8px; letter-spacing: .015em; }
+  .estimate-price strong { font-size: 44px; }
+  .country-list>span { font-size: 14px; }
+  .contact-aside dd { font-size: 15px; }
+  .contact-aside dt { font-size: 9px; }
+  .contact-email { font-size: 39px; }
+  .contact-aside>.small { font-size: 14px; }
+  .inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-size: 34px; line-height: 1.15; }
+  .inquiry-form label { font-size: 15px; }
+  .inquiry-form input,.inquiry-form select,.inquiry-form textarea { font-size: 16px; }
+  .form-progress { font-size: 9px; letter-spacing: 0; }
+  .inquiry-form .consent { font-size: 12px; line-height: 1.65; }
+  .inquiry-form .button { font-size: 13px; }
+  .legal-content h2 { font-size: 28px; }
+  .footer-cta { font-size: 37px; line-height: 1.2; max-width: 330px; }
+  .footer-links { font-size: 13px; letter-spacing: .005em; }
+  .footer-links>p { font-size: 16px; }
+  .footer-links p>span,.footer-links>div>span { font-size: 9px; }
+  .footer-top .eyebrow { font-size: 9px; }
+  .material-controls button { font-size: 11px; }
+}
+
+/* Geometric proportions are wider than the previous editorial serif. */
+.wordmark { font-family: var(--type-display); font-weight: 600; font-size: 30px; letter-spacing: -.065em; }
+.field-hero .hero-type h1 { font-size: clamp(82px,7.5vw,126px); font-weight: 600; line-height: .98; letter-spacing: -.045em; }
+.field-hero .hero-type h1>.hero-question { font-size: 1em; text-transform: uppercase; line-height: .99; letter-spacing: -.045em; font-weight: 600; }
+.field-hero .hero-type h1>.hero-outcome { font-size: .72em; line-height: 1.08; margin-top: 28px; letter-spacing: -.025em; }
+.hero-summary>p { font-size: 17px; line-height: 1.65; letter-spacing: .005em; }
+.field-statement h2,.field-principle h2 { font-size: clamp(50px,5.8vw,92px); line-height: 1.09; letter-spacing: -.055em; }
+.field-invitation h2 { font-size: clamp(72px,8vw,126px); line-height: 1.04; letter-spacing: -.06em; }
+.page-intro h1 { font-size: clamp(53px,6.6vw,99px); line-height: 1.11; letter-spacing: -.055em; }
+.path-panel h3 { font-size: clamp(33px,3.3vw,49px); line-height: 1.16; letter-spacing: -.05em; }
+.footer-cta { font-size: clamp(32px,3.6vw,56px); line-height: 1.2; letter-spacing: -.05em; }
+.footer-wordmark { font-family: var(--type-display); font-weight: 600; font-size: 18.4vw; line-height: 1; letter-spacing: -.055em; }
+.contact-email { font-size: clamp(32px,3.1vw,47px); letter-spacing: -.06em; }
+.inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-size: 35px; line-height: 1.2; letter-spacing: -.055em; }
+p,.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p,.intro-description>p,.legal-content p { letter-spacing: .003em; }
+.statement-note>p:first-child,.invitation-note>p { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; }
+.mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress,.brand-caption,.material-control-label { font-size: 11px; letter-spacing: .075em; }
+@media(min-width:1700px) { .field-hero .hero-type h1 { font-size: 126px; } }
+@media(max-width:1100px) {
+ .field-hero .hero-type h1 { font-size: 8.5vw; }
+ .wordmark { font-size: 29px; }
+ .main-nav>a:not(.nav-contact) { font-size: 12px; letter-spacing: .02em; padding-inline: 11px; }
+ .nav-contact { font-size: 12px; }
+}
+@media(max-width:800px) {
+ .field-hero .hero-type h1 { font-size: 11.5vw; }
+ .field-hero .hero-type h1>.hero-outcome { font-size: .72em; }
+ .field-statement h2,.field-principle h2 { font-size: 58px; }
+ .field-invitation h2 { font-size: 76px; }
+ .path-panel h3 { font-size: 39px; }
+ .main-nav>a:not(.nav-contact) { font-size: 21px; padding: 13px; }
+ .nav-contact { font-size: 14px; }
+ .footer-cta { font-size: 38px; }
+}
+@media(max-width:520px) {
+ .wordmark { font-size: 28px; }
+ .field-hero .hero-type h1 { font-size: clamp(45px,13.5vw,70px); }
+ .field-hero .hero-type h1>.hero-question { font-size: 1em; line-height: 1.05; letter-spacing: -.045em; }
+ .field-hero .hero-type h1>.hero-outcome { font-size: .77em; line-height: 1.12; margin-top: 24px; letter-spacing: -.025em; }
+ .field-statement h2,.field-principle h2 { font-size: 44px; line-height: 1.14; letter-spacing: -.06em; }
+ .field-invitation h2 { font-size: 59px; line-height: 1.1; }
+ .page-intro h1 { font-size: 43px; line-height: 1.14; letter-spacing: -.065em; }
+ .path-panel h3 { font-size: 32px; line-height: 1.2; }
+ .footer-cta { font-size: 30px; max-width: 330px; letter-spacing: -.055em; }
+ .contact-email { font-size: 34px; }
+ .inquiry-form h2,.inquiry-success h2,.desk-detail-header h2 { font-size: 29px; }
+ .statement-note>p:first-child,.invitation-note>p { font-size: 20px; line-height: 1.5; }
+ .mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress { font-size: 10px; letter-spacing: .055em; }
+ .hero-kicker { font-size: 9px; }
+ .instrument-caption { font-size: 9px; }
+ .field-hero .hero-bottom .mono { font-size: 9px; }
+}
+
+/* One face throughout, including captions, diagrams, forms, figures and reading text. */
+body { font-family: var(--type-display); }
+body :is(button,input,select,textarea,code,pre,kbd,output,summary,label,svg text) { font-family: var(--type-display); }
+.main-nav>a:not(.nav-contact) { letter-spacing: .015em; }
+p,.intro-description>p,.statement-note>p,.discipline-expanded>p,.path-panel>p:not(.eyebrow),.principle-bottom>p { line-height: 1.8; letter-spacing: -.015em; }
+.mono,.eyebrow,.field-home .eyebrow,.page-intro>.eyebrow,.form-progress,.brand-caption,.material-control-label { letter-spacing: .035em; }
+.footer-wordmark { font-size: 18.4vw; }

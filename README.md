@@ -1,108 +1,63 @@
-# ARRAFED — Professional Academic Support Website
+# ARRAFED — Research, with intention.
 
-A production-ready, genuine multi-page website built for **ARRAFED**, a specialized academic support, research guidance, data-analysis, and university coursework service.
+A responsive academic research studio with a continuous, scroll-driven WebGL material field, translucent glass surfaces and editorial typography, dedicated service routes and a working inquiry backend.
 
-Designed with a calm, credible, editorial, and academically informed aesthetic. Built strictly with semantic HTML5, modern Tailwind CSS, responsive progressive vanilla JavaScript, and Google Fonts (Poppins).
+## Stack
 
----
+React 19, TypeScript, Vinext (Next.js App Router conventions), Tailwind CSS 4, Cloudflare Workers, D1 + Drizzle and R2. Self-hosted font licenses and upstream notices are included in `public/fonts/licenses/`. The previous Nimbus font assets have been replaced.
 
-## 📁 Multi-Page Structure & Architecture
+## Development
 
-The site comprises 6 fully developed pages sharing a unified design system, typography hierarchy, accessibility features, and communication architecture:
+Use Node 22.13 or newer and pnpm. Install with `pnpm install --frozen-lockfile`, then run `pnpm dev`. Build with `pnpm build`; run `pnpm exec tsc --noEmit` for type checks. The development scripts support portable environments; the ignored execution profile selects the host integration.
 
-1. **`index.html` (Home / Academic Journal Front)**
-   - Atmospheric hero canvas with balanced negative space.
-   - Verified experience ledger (700+ Master's dissertations, 700+ theses, 5,000+ BBA term papers, microbiology research, Excel/Power BI).
-   - Factual trust bar with zero fake logos or fictitious guarantees.
-   - Core disciplines overview and streamlined 3-step workflow preview.
-   - Pricing teaser highlighting the ৳30 monthly package and ৳250 outside starting rate.
+The hosting manifest declares `DB` and `BUCKET`. Generate schema migrations with `pnpm db:generate`. After the first build, apply the generated SQL to the local database:
 
-2. **`services.html` (Services Catalog & Scope)**
-   - Left-side sticky contents rail on desktop; horizontal jump navigation on mobile.
-   - Granular coverage: postgraduate dissertations, BBA term papers, microbiology research, Excel financial models, Power BI dashboards, SPSS statistical testing, and citation styles (APA 7th, Harvard, OSCOLA, IEEE).
-   - "What to Send" checklist and scope clarification panels.
-   - Varied WhatsApp CTAs for every major service group.
-
-3. **`packages.html` (Packages & Transparent Pricing)**
-   - Visually dominant typographic price display for the **৳30 monthly package**.
-   - Clear scope notice: included services are free for the purchased month, with inclusions confirmed via WhatsApp prior to enrollment.
-   - **Outside Assignment Pricing** editorial rows separated by 1px rules:
-     - 1,000 words — ৳250
-     - 2,000 words — ৳450
-     - 3,000 words — ৳800
-     - 4,000 words — ৳1,000
-     - 5,000 words — ৳1,250
-   - Dedicated international student row: *"For foreign clients: Inbox for price"*.
-   - Comparison table and interactive quick price selector with formatted WhatsApp query generation.
-
-4. **`about.html` (Verified Experience & Track Record)**
-   - Factual narrative based strictly on documented delivery volume.
-   - Ledger breakdown of 700+ dissertations, 700+ theses, and 5,000+ business assignments.
-   - International study destinations (UK, Malta, Canada, Australia) without synthetic logo clouds.
-   - Six core working principles: Clear Scope, Structure, Style, Direct Communication, Affordability, and Academic Responsibility.
-
-5. **`process.html` (Step-by-Step Engagement Workflow)**
-   - Alternating desktop timeline with a central progress line, collapsing seamlessly to single-column on mobile devices.
-   - 6 clear chronological phases: Brief Preparation, WhatsApp Scope Discussion, Agreement, Execution, File Transmission, and Post-Delivery Review.
-   - Privacy-minded guidance instructing users to redact sensitive student IDs or portal credentials.
-
-6. **`contact.html` (Direct Contact & Brief Submission)**
-   - Prominent WhatsApp banner linking to **01893291245**.
-   - Comprehensive assignment brief submission form with semantic inputs, client-side validation, and instant formatted summary generation.
-   - Direct transmission of brief details to WhatsApp with pre-filled parameters.
-   - Accepted file format guidelines and direct email contact (`foharahman@gmail.com`).
-
----
-
-## 🎨 Design System & Visual Identity
-
-- **Color Palette**:
-  - Deep Academic Navy: `#0A1628` (Primary text, dark panels, solid buttons)
-  - Warm Off-White: `#F8F5F0` (Background canvas, high-readability substrate)
-  - Editorial Muted Neutral: `#EFECE6` (Accent panels, table headers)
-  - Refined Deep Teal: `#0D9488` (Primary action accent, status dots, subtle highlights)
-  - Hairline Rule Borders: `rgba(10, 22, 40, 0.12)`
-- **Typography**:
-  - Strict single font family: **Poppins** (weights 300 Light, 400 Regular, 500 Medium, 600 Semi-Bold, 700 Bold).
-  - Responsive clamp-based type scales (`type-display`, `type-h2`, `type-body`).
-- **Layout Philosophy**:
-  - **No generic card grids**: Content sits directly on the page separated by generous whitespace and subtle 1px hairline dividers.
-  - **Sharp edges**: 0px border-radius on cards, panels, tables, and inputs.
-  - **Pill buttons**: Rounded pill styling reserved solely for interactive call-to-action buttons.
-
----
-
-## 🚀 Local Development & Build Pipeline
-
-### Prerequisites
-- Node.js 18+
-- npm
-
-### Development Server
-```bash
-npm run dev
-```
-Binds Vite to `http://localhost:3000` with instant preview.
-
-### Compiling CSS
-To compile or update the Tailwind CSS bundle:
-```bash
-npx @tailwindcss/cli -i assets/css/input.css -o assets/css/output.css
+```sh
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_talented_sumo.sql
 ```
 
-### Production Build
-```bash
-npm run build
-```
-Generates an optimized multi-page distribution in `dist/` including all 6 HTML entry points, minified assets, and responsive scripts.
+For a standalone checkout, the Sites project profile can be configured with the Sites setup helpers; the app uses the supplied Workers hosting integration. Hosted deployment applies committed migrations. GitHub stores the source; GitHub Pages cannot run the Worker backend. The deployed service runs on Sites/Cloudflare.
 
----
+## GitHub Pages and production
 
-## 🛡️ Quality Assurance & Ethics Checklist
+The default `main` branch contains the current application. The production app is https://arrafed-research-studio.chatgpt-team-4613.chatgpt.site/ and runs on Workers with D1 and R2. GitHub Pages is a static entry point at https://nurajannatmitu.github.io/ARRAF-WEBSITE/; it immediately opens the production app so navigation, inquiries and uploads use the same origin and backend.
 
-- [x] **No Fake Promises**: Zero invented guarantees, fake pass percentages, or fabricated university logos.
-- [x] **Exact Pricing Integrity**: The ৳30 monthly package and ৳250–৳1,250 word count rates are reproduced without alteration.
-- [x] **Foreign Client Protocol**: Clearly designates "Inbox for price" without arbitrary currency conversions.
-- [x] **Direct WhatsApp Integration**: Standardized WhatsApp links point to `https://wa.me/8801893291245` with contextual pre-filled messages across every page.
-- [x] **Full Keyboard Accessibility**: All modal dialogs, drawers, and skip links feature keyboard focus management and screen-reader labels.
-- [x] **Responsive Precision**: Tested and fluid across mobile (320px+), tablet, and desktop breakpoints.
+`.github/workflows/jekyll-gh-pages.yml` retains the existing workflow path but replaces the old Jekyll build with a static upload of `github-pages/`. It runs on every push to `main`. Source files and server code are not published as static Pages content. `redirect.js` preserves routes, query strings and fragments; old `packages.html` links map to `/pricing`. A custom 404 supports deep links. The destination origin is fixed, and a visible link plus meta refresh provide a no-JavaScript fallback.
+
+Deploy application changes through the Sites source/build workflow before updating the Pages entry destination. Pages is deliberately a bridge to the full app rather than an incomplete static copy.
+
+## Administrator
+
+Set the runtime secret `ADMIN_EMAILS` to a comma-separated administrator email allowlist using the hosting environment settings. Never put credentials in the repository. `/admin` uses hosting-provided ChatGPT identity and a server-side allowlist. Missing configuration fails closed. Public inquiry endpoints do not expose saved records or attachment keys. Files are downloaded only through an authenticated administrator route. Other hosting providers must replace the platform identity adapter and validate sessions server-side.
+
+## Inquiry flow
+
+`POST /api/inquiries` validates fields and same-origin requests, limits request/file sizes, checks supported file signatures, rate-limits repeated submissions using a hashed network identifier and persists an inquiry reference. Optional files are stored in R2. A failed database insertion attempts to remove its uploaded file. No email is sent automatically; the studio reviews inquiries in `/admin` and contacts clients separately. The user may explicitly continue the conversation through WhatsApp.
+
+The studio desk lists the latest 200 records with search, status filters, status updates, protected downloads and confirmed deletion. `PATCH` and `DELETE /api/admin/inquiries/:id` require administrator identity and same-origin requests. Deletion removes the associated uploaded file and database record.
+
+## Content
+
+Business details and pricing come from the supplied ARRAFED brief. Prices are indicative BDT rates or defined support scopes, not payment offers. No testimonials or unverified project totals have been published. Privacy and academic-integrity pages describe the actual form and storage behavior. No payment or email-delivery integration is included.
+
+## Typography and navigation
+
+URW Gothic Demi—the face used in the “Good questions” headline—is used throughout the website: headlines, reading text, navigation, controls, forms, diagrams, captions, identifiers and figures. The shared role variables all point to that face. Only its compressed WOFF asset is loaded and preloaded; the four unused font assets and their preloads have been removed. Existing license notices remain in `public/fonts/licenses/`.
+
+`app/menu-light.css` gives the navigation rail and individual links a soft silver hover light, with equivalent keyboard-focus feedback and a persistent active-page treatment. It also provides a compact menu through the narrower tablet breakpoint. Reduced-motion preferences disable the hover transitions.
+
+## Motion and accessibility
+
+One viewport-filling WebGL canvas lives in the root layout, behind every route and section. A batched material pass renders twelve reflective, deforming chrome forms, three twisted ribbons and three orbital filaments. A second GPU pass draws 10,000 seeded particles on desktop and mobile, including larger specular flakes. Motion is calculated on the GPU rather than by creating hundreds of DOM nodes. Analytic ellipsoid intersections replace the original expensive single-object raymarch loop. Normalised scroll position controls a continuously interpolated camera, field scale, deformation, reflection temperature and material depth. Local section progress moves reading planes, headings, highlights and wireframe detail in both scroll directions. Native scrolling is preserved; the renderer does not use once-only reveal triggers or intercept wheel/touch input.
+
+`lib/scroll-scene.ts` contains pure choreography and allocation calculations. `components/liquid-steel.tsx` owns the animation loop, passive input listeners, cached section geometry and two render passes. `lib/material-shaders.ts` holds the material and particle shaders; `lib/particle-field.ts` creates the deterministic seed buffer. `app/liquid-glass.css` applies shared optical surfaces; `app/material-field.css` defines the new editorial composition, service index, interactive research map and shared page treatment. Typography is self-hosted; the palette is graphite, pewter and restrained champagne rather than blue/purple effects.
+
+The renderer targets display-refresh animation with an adaptive pixel budget instead of a fixed low frame-rate throttle. The requested 10,000-point draw count stays fixed; adaptation changes canvas resolution. Point size and opacity are tuned for the denser field, with fewer large specular flakes and gentle swirling currents. It reduces resolution if sustained frame timing misses budget. Actual 60 fps performance depends on device/browser/GPU and has not been benchmarked in this environment. Rendering stops while the document is hidden. No framework state updates or layout measurements occur on each scroll event.
+
+Reduced-motion preferences disable camera travel, deformation and section transforms. A visible motion control pauses the environment; an additional contrast control provides opaque reading surfaces. Reduced transparency, increased contrast and browsers without backdrop filtering have solid fallbacks. Text-sized reading planes protect contrast over bright specular reflections. Preferences are stored only for the current browser session. If WebGL fails, a full-viewport static multi-form chrome fallback preserves the background without section seams.
+
+## Verification
+
+Run `node --test tests/*.test.mjs` for scroll continuity, reversibility, frame-rate-independent easing, mobile framing, section progress, adaptive render limits, ten-thousand-point allocation, particle reproducibility, full-field distribution and batched-render integration checks. TypeScript and production build checks are part of delivery. The original inquiry backend was verified in an isolated SQLite/R2 integration harness; visual changes do not modify its API or storage schema.
+
+The managed local preview daemon was unavailable during this update. Browser visual, responsive-device and measured frame-rate checks must be distinguished from the successful automated checks; see the delivery notes for the current outcome.
